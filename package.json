@@ -1,0 +1,15 @@
+{
+  "name": "toy-robot-nodejs",
+  "version": "1.0.0",
+  "description": "A toy robot simulator written in NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Phuong Mai Nguyen",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
