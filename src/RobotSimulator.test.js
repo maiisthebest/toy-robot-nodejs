@@ -3,6 +3,19 @@ const Robot = require("./Robot");
 const RobotSimulator = require("./RobotSimulator");
 
 describe("RobotSimulator", () => {
+  it("should operate the robot correctly", () => {
+    const table = new Table(5, 5);
+    const robot = new Robot();
+    const simulator = new RobotSimulator(table, robot);
+
+    simulator.place(1, 2, "EAST");
+    simulator.move();
+    simulator.move();
+    simulator.turnLeft();
+    simulator.move();
+
+    expect(simulator.report()).toBe("Output: 3,3,NORTH");
+  });
   describe("place()", () => {
     it.each`
       x    | y    | direction
@@ -182,7 +195,7 @@ describe("RobotSimulator", () => {
       const x = 0;
       const y = 1;
       const direction = "NORTH";
-      const expectedOutput = `${x},${y},${direction}`;
+      const expectedOutput = `Output: ${x},${y},${direction}`;
       simulator.place(x, y, direction);
 
       const output = simulator.report();

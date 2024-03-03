@@ -25,7 +25,7 @@ class RobotSimulator {
   }
 
   report() {
-    if (this.robot.isPlaced()) return this.robot.report();
+    if (this.robot.isPlaced()) return `Output: ${this.robot.report()}`;
   }
 }
 
