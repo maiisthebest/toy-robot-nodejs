@@ -15,6 +15,14 @@ class RobotSimulator {
       if (this.table.isOnTheTable(newX, newY)) this.robot.move();
     }
   }
+
+  turnLeft() {
+    if (this.robot.isPlaced()) this.robot.turnLeft();
+  }
+
+  turnRight() {
+    if (this.robot.isPlaced()) this.robot.turnRight();
+  }
 }
 
 module.exports = RobotSimulator;

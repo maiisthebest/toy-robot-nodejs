@@ -110,4 +110,66 @@ describe("RobotSimulator", () => {
       expect(robot.direction).toBe(undefined);
     });
   });
+
+  describe("turnLeft()", () => {
+    it("should rotate the robot 90 degrees to LEFT", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      const currentX = 0;
+      const currentY = 0;
+      const currentDirection = "NORTH";
+      simulator.place(currentX, currentY, currentDirection);
+
+      simulator.turnLeft();
+
+      expect(robot.x).toBe(currentX);
+      expect(robot.y).toBe(currentY);
+      expect(robot.direction).toBe("WEST");
+    });
+
+    it("should NOT turn the robot given the robot is not placed on the table yet", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      simulator.turnLeft();
+
+      expect(robot.x).toBe(undefined);
+      expect(robot.y).toBe(undefined);
+      expect(robot.direction).toBe(undefined);
+    });
+  });
+
+  describe("turnRight()", () => {
+    it("should rotate the robot 90 degrees to RIGHT", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      const currentX = 1;
+      const currentY = 1;
+      const currentDirection = "WEST";
+      simulator.place(currentX, currentY, currentDirection);
+
+      simulator.turnRight();
+
+      expect(robot.x).toBe(currentX);
+      expect(robot.y).toBe(currentY);
+      expect(robot.direction).toBe("NORTH");
+    });
+
+    it("should NOT turn the robot given the robot is not placed on the table yet", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      simulator.turnRight();
+
+      expect(robot.x).toBe(undefined);
+      expect(robot.y).toBe(undefined);
+      expect(robot.direction).toBe(undefined);
+    });
+  });
 });

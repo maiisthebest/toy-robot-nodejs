@@ -1,3 +1,5 @@
+const directions = ["NORTH", "EAST", "SOUTH", "WEST"];
+
 class Robot {
   constructor() {}
 
@@ -38,6 +40,24 @@ class Robot {
 
     this.x = newX;
     this.y = newY;
+  }
+
+  turnLeft() {
+    const newDirectionIndex = directions.indexOf(this.direction) - 1;
+
+    this.direction =
+      newDirectionIndex < 0
+        ? directions[newDirectionIndex + directions.length]
+        : directions[newDirectionIndex];
+  }
+
+  turnRight() {
+    const newDirectionIndex = directions.indexOf(this.direction) + 1;
+
+    this.direction =
+      newDirectionIndex >= directions.length
+        ? directions[newDirectionIndex - directions.length]
+        : directions[newDirectionIndex];
   }
 }
 
