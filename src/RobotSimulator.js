@@ -27,6 +27,16 @@ class RobotSimulator {
   report() {
     if (this.robot.isPlaced()) return `Output: ${this.robot.report()}`;
   }
+
+  executeCommand(command) {
+    const [action, ...args] = command.toUpperCase().trim().split(/\s+/);
+
+    switch (action) {
+      case "PLACE":
+        this.place(...args.join("").split(","));
+        break;
+    }
+  }
 }
 
 module.exports = RobotSimulator;

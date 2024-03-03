@@ -4,8 +4,14 @@ class Robot {
   constructor() {}
 
   place(x, y, direction) {
-    this.x = x;
-    this.y = y;
+    const numberX = Number(x);
+    if (Number.isNaN(numberX)) return "x is not a valid number";
+
+    const numberY = Number(y);
+    if (Number.isNaN(numberY)) return "y is not a valid number";
+
+    this.x = numberX;
+    this.y = numberY;
     this.direction = direction;
   }
 

@@ -227,4 +227,26 @@ describe("RobotSimulator", () => {
       expect(simulator.report()).toBe(undefined);
     });
   });
+
+  describe("executeCommand()", () => {
+    it.each`
+      command                            | expectedX | expectedY | expectedDirection
+      ${"PLACE 0,0,NORTH"}               | ${0}      | ${0}      | ${"NORTH"}
+      ${"place 1 , 2,  east"}            | ${1}      | ${2}      | ${"EAST"}
+      ${"    Place     5,0 ,  wESt    "} | ${5}      | ${0}      | ${"WEST"}
+    `(
+      "should execute PLACE command given $command",
+      ({ command, expectedX, expectedY, expectedDirection }) => {
+        const table = new Table(5, 5);
+        const robot = new Robot();
+        const simulator = new RobotSimulator(table, robot);
+
+        simulator.executeCommand(command);
+
+        expect(robot.x).toBe(expectedX);
+        expect(robot.y).toBe(expectedY);
+        expect(robot.direction).toBe(expectedDirection);
+      }
+    );
+  });
 });
