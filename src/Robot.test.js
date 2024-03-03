@@ -8,11 +8,56 @@ describe("Robot", () => {
       const y = 3;
       const direction = "WEST";
 
-      robot.place(x, y, direction);
+      robot.place(2, 3, "WEST");
 
       expect(robot.x).toBe(x);
       expect(robot.y).toBe(y);
       expect(robot.direction).toBe(direction);
+    });
+  });
+
+  describe("isPlaced()", () => {
+    it("should return true given the robot is already placed on a table", () => {
+      const robot = new Robot();
+
+      robot.place(2, 3, "WEST");
+
+      expect(robot.isPlaced()).toBe(true);
+    });
+
+    it("should return false given the robot is not placed on a table yet", () => {
+      const robot = new Robot();
+
+      expect(robot.isPlaced()).toBe(false);
+    });
+
+    describe("move()", () => {
+      it.each`
+        currentX | currentY | currentDirection | newX | newY | newDirection
+        ${3}     | ${4}     | ${"NORTH"}       | ${3} | ${5} | ${"NORTH"}
+        ${0}     | ${0}     | ${"EAST"}        | ${1} | ${0} | ${"EAST"}
+        ${3}     | ${3}     | ${"SOUTH"}       | ${3} | ${2} | ${"SOUTH"}
+        ${5}     | ${5}     | ${"WEST"}        | ${4} | ${5} | ${"WEST"}
+      `(
+        "should move the robot one unit forward in the direction it is facing given current position ($currentX, $currentY, $currentDirection)",
+        ({
+          currentX,
+          currentY,
+          currentDirection,
+          newX,
+          newY,
+          newDirection,
+        }) => {
+          const robot = new Robot();
+
+          robot.place(currentX, currentY, currentDirection);
+          robot.move();
+
+          expect(robot.x).toBe(newX);
+          expect(robot.y).toBe(newY);
+          expect(robot.direction).toBe(newDirection);
+        }
+      );
     });
   });
 });

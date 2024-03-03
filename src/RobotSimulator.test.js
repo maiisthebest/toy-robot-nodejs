@@ -50,4 +50,64 @@ describe("RobotSimulator", () => {
       }
     );
   });
+
+  describe("move()", () => {
+    it.each`
+      currentX | currentY | currentDirection | newX | newY | newDirection
+      ${3}     | ${4}     | ${"NORTH"}       | ${3} | ${5} | ${"NORTH"}
+      ${0}     | ${0}     | ${"EAST"}        | ${1} | ${0} | ${"EAST"}
+      ${3}     | ${3}     | ${"SOUTH"}       | ${3} | ${2} | ${"SOUTH"}
+      ${5}     | ${5}     | ${"WEST"}        | ${4} | ${5} | ${"WEST"}
+    `(
+      "should move the robot one unit forward in the direction it is facing given current position ($currentX, $currentY, $currentDirection) and the new position is still inside the table",
+      ({ currentX, currentY, currentDirection, newX, newY, newDirection }) => {
+        const table = new Table(5, 5);
+        const robot = new Robot();
+        const simulator = new RobotSimulator(table, robot);
+
+        simulator.place(currentX, currentY, currentDirection);
+
+        simulator.move();
+
+        expect(robot.x).toBe(newX);
+        expect(robot.y).toBe(newY);
+        expect(robot.direction).toBe(newDirection);
+      }
+    );
+
+    it.each`
+      currentX | currentY | currentDirection
+      ${4}     | ${5}     | ${"NORTH"}
+      ${5}     | ${0}     | ${"EAST"}
+      ${3}     | ${0}     | ${"SOUTH"}
+      ${0}     | ${5}     | ${"WEST"}
+    `(
+      "should NOT move the robot given current position ($currentX, $currentY, $currentDirection) and the new position is outside of the table",
+      ({ currentX, currentY, currentDirection }) => {
+        const table = new Table(5, 5);
+        const robot = new Robot();
+        const simulator = new RobotSimulator(table, robot);
+
+        simulator.place(currentX, currentY, currentDirection);
+
+        simulator.move();
+
+        expect(robot.x).toBe(currentX);
+        expect(robot.y).toBe(currentY);
+        expect(robot.direction).toBe(currentDirection);
+      }
+    );
+
+    it("should NOT move the robot given the robot is not placed on the table yet", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      simulator.move();
+
+      expect(robot.x).toBe(undefined);
+      expect(robot.y).toBe(undefined);
+      expect(robot.direction).toBe(undefined);
+    });
+  });
 });
