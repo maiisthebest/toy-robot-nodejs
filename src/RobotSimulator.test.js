@@ -203,6 +203,22 @@ describe("RobotSimulator", () => {
       expect(output).toBe(expectedOutput);
     });
 
+    it("should report the x, y and orientation on multiple report commands", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      const x = 0;
+      const y = 1;
+      const direction = "NORTH";
+      const expectedOutput = `Output: ${x},${y},${direction}`;
+      simulator.place(x, y, direction);
+
+      expect(simulator.report()).toBe(expectedOutput);
+      expect(simulator.report()).toBe(expectedOutput);
+      expect(simulator.report()).toBe(expectedOutput);
+    });
+
     it("should NOT report given the robot is not placed on the table yet", () => {
       const table = new Table(5, 5);
       const robot = new Robot();
