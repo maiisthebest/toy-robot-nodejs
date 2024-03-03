@@ -49,7 +49,10 @@ class RobotSimulator {
         break;
 
       case "REPORT":
-        return this.report();
+        const report = this.report();
+        console.log(report);
+
+        return report;
     }
   }
 }
