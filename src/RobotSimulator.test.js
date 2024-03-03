@@ -266,5 +266,56 @@ describe("RobotSimulator", () => {
       expect(robot.y).toBe(1);
       expect(robot.direction).toBe("NORTH");
     });
+
+    it.each`
+      command
+      ${"LEFT"}
+      ${"left "}
+      ${"    lEFt , , ,    "}
+    `("should execute LEFT command given $command", ({ command }) => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+      simulator.place(0, 0, "NORTH");
+
+      simulator.executeCommand(command);
+
+      expect(robot.x).toBe(0);
+      expect(robot.y).toBe(0);
+      expect(robot.direction).toBe("WEST");
+    });
+
+    it.each`
+      command
+      ${"RIGHT"}
+      ${"right "}
+      ${"    righT , , ,    "}
+    `("should execute RIGHT command given $command", ({ command }) => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+      simulator.place(0, 0, "NORTH");
+
+      simulator.executeCommand(command);
+
+      expect(robot.x).toBe(0);
+      expect(robot.y).toBe(0);
+      expect(robot.direction).toBe("EAST");
+    });
+
+    it.each`
+      command
+      ${"REPORT"}
+      ${"report "}
+      ${"    rePOrt , , ,    "}
+    `("should execute REPORT command given $command", ({ command }) => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+      simulator.place(0, 0, "NORTH");
+
+      const expectedOutput = `Output: 0,0,NORTH`;
+      expect(simulator.executeCommand(command)).toBe(expectedOutput);
+    });
   });
 });

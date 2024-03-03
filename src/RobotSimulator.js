@@ -39,6 +39,17 @@ class RobotSimulator {
       case "MOVE":
         this.move();
         break;
+
+      case "LEFT":
+        this.turnLeft();
+        break;
+
+      case "RIGHT":
+        this.turnRight();
+        break;
+
+      case "REPORT":
+        return this.report();
     }
   }
 }
