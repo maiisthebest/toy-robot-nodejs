@@ -59,6 +59,10 @@ class Robot {
         ? directions[newDirectionIndex - directions.length]
         : directions[newDirectionIndex];
   }
+
+  report() {
+    return `${this.x},${this.y},${this.direction}`;
+  }
 }
 
 module.exports = Robot;

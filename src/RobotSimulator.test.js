@@ -172,4 +172,30 @@ describe("RobotSimulator", () => {
       expect(robot.direction).toBe(undefined);
     });
   });
+
+  describe("report()", () => {
+    it("should report the x, y and orientation", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      const x = 0;
+      const y = 1;
+      const direction = "NORTH";
+      const expectedOutput = `${x},${y},${direction}`;
+      simulator.place(x, y, direction);
+
+      const output = simulator.report();
+
+      expect(output).toBe(expectedOutput);
+    });
+
+    it("should NOT report given the robot is not placed on the table yet", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      expect(simulator.report()).toBe(undefined);
+    });
+  });
 });

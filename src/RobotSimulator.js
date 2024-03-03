@@ -23,6 +23,10 @@ class RobotSimulator {
   turnRight() {
     if (this.robot.isPlaced()) this.robot.turnRight();
   }
+
+  report() {
+    if (this.robot.isPlaced()) return this.robot.report();
+  }
 }
 
 module.exports = RobotSimulator;

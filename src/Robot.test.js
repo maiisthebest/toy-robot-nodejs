@@ -97,4 +97,18 @@ describe("Robot", () => {
       }
     );
   });
+
+  describe("report()", () => {
+    it("should report the x, y and orientation", () => {
+      const robot = new Robot();
+
+      const x = 2;
+      const y = 3;
+      const direction = "WEST";
+      const expectedOutput = `${x},${y},${direction}`;
+      robot.place(x, y, direction);
+
+      expect(robot.report()).toBe(expectedOutput);
+    });
+  });
 });
