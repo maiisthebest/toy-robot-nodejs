@@ -248,5 +248,23 @@ describe("RobotSimulator", () => {
         expect(robot.direction).toBe(expectedDirection);
       }
     );
+
+    it.each`
+      command
+      ${"MOVE"}
+      ${"move "}
+      ${"    mOve , , ,    "}
+    `("should execute MOVE command given $command", ({ command }) => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+      simulator.place(0, 0, "NORTH");
+
+      simulator.executeCommand(command);
+
+      expect(robot.x).toBe(0);
+      expect(robot.y).toBe(1);
+      expect(robot.direction).toBe("NORTH");
+    });
   });
 });

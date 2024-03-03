@@ -35,6 +35,10 @@ class RobotSimulator {
       case "PLACE":
         this.place(...args.join("").split(","));
         break;
+
+      case "MOVE":
+        this.move();
+        break;
     }
   }
 }
