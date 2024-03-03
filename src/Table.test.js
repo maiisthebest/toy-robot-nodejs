@@ -15,7 +15,7 @@ describe("Table", () => {
       ${0} | ${0}
       ${5} | ${7}
     `(
-      "should return true given the position ($x, $y) which is on the table",
+      "should return true given the position ($x, $y) being inside the table",
       ({ x, y }) => {
         const table = new Table(5, 7);
 
@@ -30,7 +30,7 @@ describe("Table", () => {
       ${-1} | ${5}
       ${4}  | ${-1}
     `(
-      "should return false given the position ($x, $y) which is NOT on the table",
+      "should return false given the position ($x, $y) being outside of the table",
       ({ x, y }) => {
         const table = new Table(5, 7);
 
