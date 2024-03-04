@@ -215,11 +215,11 @@ describe("RobotSimulator", () => {
       const x = 0;
       const y = 1;
       const direction = "NORTH";
-      const expectedOutput = `Output: ${x},${y},${direction}`;
       simulator.place(x, y, direction);
 
       const output = simulator.report();
 
+      const expectedOutput = `Output: ${x},${y},${direction}`;
       expect(output).toBe(expectedOutput);
     });
 
@@ -231,9 +231,9 @@ describe("RobotSimulator", () => {
       const x = 0;
       const y = 1;
       const direction = "NORTH";
-      const expectedOutput = `Output: ${x},${y},${direction}`;
       simulator.place(x, y, direction);
 
+      const expectedOutput = `Output: ${x},${y},${direction}`;
       expect(simulator.report()).toBe(expectedOutput);
       expect(simulator.report()).toBe(expectedOutput);
       expect(simulator.report()).toBe(expectedOutput);
@@ -249,6 +249,17 @@ describe("RobotSimulator", () => {
   });
 
   describe("executeCommand()", () => {
+    let originalConsoleLog;
+
+    beforeEach(() => {
+      originalConsoleLog = console.log;
+      console.log = jest.fn();
+    });
+
+    afterEach(() => {
+      console.log = originalConsoleLog;
+    });
+
     it.each`
       command                            | expectedX | expectedY | expectedDirection
       ${"PLACE 0,0,NORTH"}               | ${0}      | ${0}      | ${"NORTH"}
@@ -334,8 +345,10 @@ describe("RobotSimulator", () => {
       const simulator = new RobotSimulator(table, robot);
       simulator.place(0, 0, "NORTH");
 
+      simulator.executeCommand(command);
+
       const expectedOutput = `Output: 0,0,NORTH`;
-      expect(simulator.executeCommand(command)).toBe(expectedOutput);
+      expect(console.log).toBeCalledWith(expectedOutput);
     });
 
     it("should throw error given invalid command", () => {

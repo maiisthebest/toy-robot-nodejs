@@ -51,9 +51,8 @@ class RobotSimulator {
 
       case "REPORT":
         const report = this.report();
-        console.log(report);
-
-        return report;
+        if (report !== undefined) console.log(report);
+        break;
 
       default:
         throw new Error(
