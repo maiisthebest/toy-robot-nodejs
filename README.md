@@ -18,7 +18,7 @@ To get started with this project, follow these simple steps:
 
 ## Running the tests
 
-This project was created using test-driven development because I truly care about quality 🤩
+This project was created using test-driven development because I truly care about quality 🤩 Many test cases were considered including happy path, error cases, edge cases when developing the app. Test data are part of the test files.
 
 1. `npm test` to run all the unit tests available.
 
