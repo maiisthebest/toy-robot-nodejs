@@ -1,4 +1,5 @@
 const readline = require("readline");
+const { INTRODUCTION_MESSAGE } = require("./constants");
 
 class RobotApp {
   constructor(simulator) {
@@ -7,14 +8,16 @@ class RobotApp {
       output: process.stdout,
     });
 
-    this.simulator = simulator;
-
     this.rl.on("close", () => {
       this.cleanup();
     });
+
+    this.simulator = simulator;
+    this.introMsg = INTRODUCTION_MESSAGE;
   }
 
   start() {
+    console.log(this.introMsg);
     this.promptUser();
   }
 
@@ -26,7 +29,6 @@ class RobotApp {
 
           this.rl.close();
         } else {
-          console.log(`You entered: ${command}`);
           this.simulator.executeCommand(command);
 
           this.promptUser();
