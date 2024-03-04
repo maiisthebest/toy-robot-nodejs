@@ -14,6 +14,30 @@ describe("Robot", () => {
       expect(robot.y).toBe(y);
       expect(robot.direction).toBe(direction);
     });
+
+    it("should throw error given invalid x coordinate", () => {
+      const robot = new Robot();
+
+      expect(() => robot.place("some invalid values for x", 3, "WEST")).toThrow(
+        "x is not a valid number"
+      );
+    });
+
+    it("should throw error given invalid y coordinate", () => {
+      const robot = new Robot();
+
+      expect(() => robot.place(1, "some invalid values for x", "WEST")).toThrow(
+        "y is not a valid number"
+      );
+    });
+
+    it("should throw error given invalid direction", () => {
+      const robot = new Robot();
+
+      expect(() => robot.place(0, 0, "NORTH EAST")).toThrow(
+        "Invalid direction. Direction can only be: NORTH, EAST, SOUTH, WEST"
+      );
+    });
   });
 
   describe("isPlaced()", () => {

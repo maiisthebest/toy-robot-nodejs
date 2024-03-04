@@ -1,11 +1,25 @@
 const Table = require("./Table");
 
 describe("Table", () => {
-  it("initialises with correct width and length", () => {
-    const table = new Table(6, 4);
+  describe("constructor()", () => {
+    it("initialises with correct width and length", () => {
+      const table = new Table(6, 4);
 
-    expect(table.width).toBe(6);
-    expect(table.length).toBe(4);
+      expect(table.width).toBe(6);
+      expect(table.length).toBe(4);
+    });
+
+    it("should throw error given invalid width", () => {
+      expect(() => new Table("some invalid values for width", 0)).toThrow(
+        "Table width is not a valid number"
+      );
+    });
+
+    it("should throw error given invalid length", () => {
+      expect(() => new Table(0, "some invalid values for length")).toThrow(
+        "Table length is not a valid number"
+      );
+    });
   });
 
   describe("isOnTheTable()", () => {
@@ -37,5 +51,21 @@ describe("Table", () => {
         expect(table.isOnTheTable(x, y)).toBe(false);
       }
     );
+
+    it("should throw error given invalid x coordinate", () => {
+      const table = new Table(5, 5);
+
+      expect(() => table.isOnTheTable("some invalid values for x", 0)).toThrow(
+        "x is not a valid number"
+      );
+    });
+
+    it("should throw error given invalid y coordinate", () => {
+      const table = new Table(5, 5);
+
+      expect(() => table.isOnTheTable(0, "some invalid values for x")).toThrow(
+        "y is not a valid number"
+      );
+    });
   });
 });

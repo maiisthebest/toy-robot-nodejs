@@ -29,6 +29,7 @@ class RobotSimulator {
   }
 
   executeCommand(command) {
+    // Split the command into an array of words, using one or more whitespaces as the separator
     const [action, ...args] = command.toUpperCase().trim().split(/\s+/);
 
     switch (action) {
@@ -53,6 +54,11 @@ class RobotSimulator {
         console.log(report);
 
         return report;
+
+      default:
+        throw new Error(
+          "Invalid command. Commands can only be: PLACE, MOVE, LEFT, RIGHT, REPORT"
+        );
     }
   }
 }

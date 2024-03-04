@@ -62,6 +62,26 @@ describe("RobotSimulator", () => {
         expect(robot.direction).toBe(currentDirection);
       }
     );
+
+    it("should throw error given invalid x y coordinates", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      expect(() =>
+        simulator.place("some invalid values for x", 0, "NORTH")
+      ).toThrow("x is not a valid number");
+    });
+
+    it("should throw error given invalid direction", () => {
+      const table = new Table(5, 5);
+      const robot = new Robot();
+      const simulator = new RobotSimulator(table, robot);
+
+      expect(() => simulator.place(0, 0, "NORTH EAST")).toThrow(
+        "Invalid direction. Direction can only be: NORTH, EAST, SOUTH, WEST"
+      );
+    });
   });
 
   describe("move()", () => {
@@ -316,6 +336,14 @@ describe("RobotSimulator", () => {
 
       const expectedOutput = `Output: 0,0,NORTH`;
       expect(simulator.executeCommand(command)).toBe(expectedOutput);
+    });
+
+    it("should throw error given invalid command", () => {
+      const simulator = new RobotSimulator(new Table(5, 5), new Robot());
+
+      expect(() => simulator.executeCommand("RESTART robot")).toThrow(
+        "Invalid command. Commands can only be: PLACE, MOVE, LEFT, RIGHT, REPORT"
+      );
     });
   });
 });

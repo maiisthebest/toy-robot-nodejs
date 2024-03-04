@@ -5,10 +5,15 @@ class Robot {
 
   place(x, y, direction) {
     const numberX = Number(x);
-    if (Number.isNaN(numberX)) return "x is not a valid number";
+    if (Number.isNaN(numberX)) throw new Error("x is not a valid number");
 
     const numberY = Number(y);
-    if (Number.isNaN(numberY)) return "y is not a valid number";
+    if (Number.isNaN(numberY)) throw new Error("y is not a valid number");
+
+    if (directions.indexOf(direction) === -1)
+      throw new Error(
+        `Invalid direction. Direction can only be: ${directions.join(", ")}`
+      );
 
     this.x = numberX;
     this.y = numberY;
